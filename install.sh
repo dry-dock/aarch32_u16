@@ -33,7 +33,7 @@ apt-get install -y -q \
   gcc=4:5.3.1* \
   gettext=0.19.7* \
   htop=2.0.1* \
-  libxml2-dev=2.9.3+dfsg1* \
+  libxml2-dev=2.9.3* \
   libxslt1-dev=1.1.28* \
   make=4.1* \
   nano=2.5.3* \
@@ -74,7 +74,7 @@ apt-get install -y -q \
 pip install virtualenv
 
 echo "================= Adding JQ 1.5.1 ==================="
-apt-get install -y -q jq=1.5+dfsg*
+apt-get install -y -q jq=1.5*
 
 
 echo "================= Adding gcloud ============"
