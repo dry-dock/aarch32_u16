@@ -46,12 +46,25 @@ apt-get install -y -q \
   wget=1.17.1* \
   rsync=3.1.1* \
   psmisc=22.21* \
+  libssl-dev=1.0.2g* \
+  libffi-dev=3.2.1* \
   vim=2:7.4.1689*
 
 echo "================= Installing Git ==================="
 add-apt-repository ppa:git-core/ppa -y
 apt-get update -qq
 apt-get install -y -q git=1:2.16.2*
+
+
+echo "================= Installing Node 9.x ==================="
+/u16/node/install.sh
+
+echo "================= Installing Java 1.8.0 ==================="
+/u16/java/install.sh
+
+echo "================= Installing Ruby 2.5.0  ==================="
+/u16/ruby/install.sh
+
 
 echo "================= Cleaning package lists ==================="
 apt-get clean
