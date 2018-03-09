@@ -25,7 +25,6 @@ touch "$HOME/.ssh/known_hosts"
 mkdir -p /etc/drydock
 touch /etc/drydock/.env
 
-
 echo "================= Installing basic packages ==================="
 apt-get install -y -q \
   build-essential=12.1ubuntu2* \
@@ -129,6 +128,14 @@ mv /tmp/packer/packer /usr/bin/packer
 
 echo "Added packer successfully"
 echo "-----------------------------------"
+
+echo "================= Intalling Shippable CLIs ================="
+git clone https://github.com/Shippable/node.git nodeRepo
+./nodeRepo/shipctl/aarch32/Ubuntu_16.04/install.sh
+rm -rf nodeRepo
+
+echo "Installed Shippable CLIs successfully"
+echo "-------------------------------------"
 
 echo "================= Cleaning package lists ==================="
 apt-get clean
