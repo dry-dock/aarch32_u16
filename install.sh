@@ -16,6 +16,17 @@ cd /u16
 echo "================= Updating package lists ==================="
 apt-get update
 
+echo "================= Adding some global settings ==================="
+mv gbl_env.sh /etc/profile.d/
+mkdir -p "$HOME/.ssh/"
+mv config "$HOME/.ssh/"
+mv 90forceyes /etc/apt/apt.conf.d/
+touch "$HOME/.ssh/known_hosts"
+mkdir -p /etc/drydock
+touch /etc/drydock/.env
+
+
+echo "================= Installing basic packages ==================="
 apt-get install -y -q \
   build-essential=12.1ubuntu2* \
   curl=7.47.0* \
@@ -37,13 +48,10 @@ apt-get install -y -q \
   psmisc=22.21* \
   vim=2:7.4.1689*
 
-echo "================= Adding some global settings ==================="
-mv gbl_env.sh /etc/profile.d/
-mkdir -p "$HOME/.ssh/"
-mv config "$HOME/.ssh/"
-mv 90forceyes /etc/apt/apt.conf.d/
-touch "$HOME/.ssh/known_hosts"
-mkdir -p /etc/drydock
+echo "================= Installing Git ==================="
+add-apt-repository ppa:git-core/ppa -y
+apt-get update -qq
+apt-get install -y -q git=1:2.16.2*
 
 echo "================= Cleaning package lists ==================="
 apt-get clean
