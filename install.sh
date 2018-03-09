@@ -33,7 +33,7 @@ apt-get install -y -q \
   gcc=4:5.3.1* \
   gettext=0.19.7* \
   htop=2.0.1* \
-  libxml2-dev=2.9.3+dfsg1* \
+  libxml2-dev=2.9.3* \
   libxslt1-dev=1.1.28* \
   make=4.1* \
   nano=2.5.3* \
@@ -65,6 +65,70 @@ echo "================= Installing Java 1.8.0 ==================="
 echo "================= Installing Ruby 2.5.0  ==================="
 /u16/ruby/install.sh
 
+echo "================= Installing Python packages ==================="
+apt-get install -y -q \
+  python-pip=8.1.1* \
+  python-software-properties=0.96.20.7 \
+  python-dev=2.7.12*
+
+pip install virtualenv
+
+echo "================= Adding JQ 1.5.1 ==================="
+apt-get install -y -q jq=1.5*
+
+
+echo "================= Adding gcloud ============"
+CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
+echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
+curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+sudo apt-get update && sudo apt-get install google-cloud-sdk=160.0.0-0
+
+KUBECTL_VERSION=1.5.1
+echo "================= Adding kubectl $KUBECTL_VERSION ==================="
+curl -sSLO https://storage.googleapis.com/kubernetes-release/release/v"$KUBECTL_VERSION"/bin/linux/arm/kubectl
+curl -sSLO https://storage.googleapis.com/kubernetes-release/release/v"$KUBECTL_VERSION"/bin/linux/arm/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+
+echo "================= Adding awscli 1.11.91 ============"
+sudo pip install 'awscli==1.11.91'
+
+echo "================= Adding awsebcli 3.9.0 ============"
+sudo pip install 'awsebcli==3.9.0'
+
+echo "================ Adding ansible 2.3.0.0 ===================="
+sudo pip install -q 'ansible==2.3.0.0'
+
+echo "================ Adding boto 2.46.1 ======================="
+sudo pip install 'boto==2.46.1'
+
+echo "================ Adding boto3 ======================="
+sudo pip install 'boto3==1.5.15'
+
+echo "================ Adding apache-libcloud 2.0.0 ======================="
+sudo pip install 'apache-libcloud==2.0.0'
+
+echo "================ Adding azure 2.0.0rc5 ======================="
+sudo pip install 'azure==2.0.0rc5'
+
+echo "================ Adding dopy 0.3.7a ======================="
+sudo pip install 'dopy==0.3.7a'
+
+export PK_VERSION=1.1.0
+echo "================ Adding packer $PK_VERSION ===================="
+export PK_FILE=packer_"$PK_VERSION"_linux_arm.zip
+
+echo "Fetching packer"
+echo "-----------------------------------"
+rm -rf /tmp/packer
+mkdir -p /tmp/packer
+wget -nv https://releases.hashicorp.com/packer/$PK_VERSION/$PK_FILE
+unzip -o $PK_FILE -d /tmp/packer
+sudo chmod +x /tmp/packer/packer
+mv /tmp/packer/packer /usr/bin/packer
+
+echo "Added packer successfully"
+echo "-----------------------------------"
 
 echo "================= Cleaning package lists ==================="
 apt-get clean
