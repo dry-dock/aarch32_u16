@@ -53,7 +53,7 @@ apt-get install -y -q \
 echo "================= Installing Git ==================="
 add-apt-repository ppa:git-core/ppa -y
 apt-get update -qq
-apt-get install -y -q git=1:2.17.0*
+apt-get install -y -q git=1:2.7*
 
 echo "================= Installing Python packages ==================="
 apt-get install -y -q \
