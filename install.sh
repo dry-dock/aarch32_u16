@@ -28,32 +28,43 @@ touch /etc/drydock/.env
 echo "================= Installing basic packages ==================="
 apt-get install -y -q \
   build-essential=12.1ubuntu2* \
-  curl=7.47.0* \
-  gcc=4:5.3.1* \
-  gettext=0.19.7* \
-  htop=2.0.1* \
-  libxml2-dev=2.9.3* \
-  libxslt1-dev=1.1.28* \
+  curl=7.47* \
+  gcc=4:5.3* \
+  gettext=0.19* \
+  htop=2.0* \
+  libxml2-dev=2.9* \
+  libxslt1-dev=1.1* \
   make=4.1* \
-  nano=2.5.3* \
-  openssh-client=1:7.2p2* \
-  openssl=1.0.2g* \
-  software-properties-common=0.96.20.7* \
-  sudo=1.8.16* \
-  texinfo=6.1.0.dfsg.1* \
+  nano=2.5* \
+  openssh-client=1:7* \
+  openssl=1.0* \
+  software-properties-common=0.96* \
+  sudo=1.8* \
+  texinfo=6.1* \
   unzip=6.0* \
-  wget=1.17.1* \
-  rsync=3.1.1* \
+  zip=3.0* \
+  wget=1.17* \
+  rsync=3.1* \
   psmisc=22.21* \
-  libssl-dev=1.0.2g* \
-  libffi-dev=3.2.1* \
-  vim=2:7.4.1689*
+  libssl-dev=1.0* \
+  libffi-dev=3.2* \
+  vim=2:7*
 
 echo "================= Installing Git ==================="
 add-apt-repository ppa:git-core/ppa -y
 apt-get update -qq
-apt-get install -y -q git=1:2.16.2*
+apt-get install -y -q git=1:2*
 
+echo "================= Installing Python packages ==================="
+apt-get install -y -q \
+  python-pip=8.1* \
+  python-software-properties=0.96* \
+  python-dev=2.7*
+
+pip install virtualenv
+
+echo "================= Adding JQ 1.5.1 ==================="
+apt-get install -y -q jq=1.5*
 
 echo "================= Installing Node 9.x ==================="
 /u16/node/install.sh
@@ -64,56 +75,48 @@ echo "================= Installing Java 1.8.0 ==================="
 echo "================= Installing Ruby 2.5.0  ==================="
 /u16/ruby/install.sh
 
-echo "================= Installing Python packages ==================="
-apt-get install -y -q \
-  python-pip=8.1.1* \
-  python-software-properties=0.96.20.7 \
-  python-dev=2.7.12*
-
-pip install virtualenv
-
-echo "================= Adding JQ 1.5.1 ==================="
-apt-get install -y -q jq=1.5*
-
-
 echo "================= Adding gcloud ============"
 CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
 curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-sudo apt-get update && sudo apt-get install google-cloud-sdk=160.0.0-0
+sudo apt-get update && sudo apt-get install google-cloud-sdk=196.*
 
-KUBECTL_VERSION=1.5.1
+KUBECTL_VERSION=1.9.0
 echo "================= Adding kubectl $KUBECTL_VERSION ==================="
 curl -sSLO https://storage.googleapis.com/kubernetes-release/release/v"$KUBECTL_VERSION"/bin/linux/arm/kubectl
 curl -sSLO https://storage.googleapis.com/kubernetes-release/release/v"$KUBECTL_VERSION"/bin/linux/arm/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
-echo "================= Adding awscli 1.11.91 ============"
-sudo pip install 'awscli==1.11.91'
+echo "================= Adding awscli 1.15.3 ============"
+sudo pip install 'awscli==1.15.3'
 
-echo "================= Adding awsebcli 3.9.0 ============"
-sudo pip install 'awsebcli==3.9.0'
+echo "================= Adding awsebcli 3.12.4 ============"
+sudo pip install 'awsebcli==3.12.4'
 
-echo "================ Adding ansible 2.3.0.0 ===================="
-sudo pip install -q 'ansible==2.3.0.0'
+echo "================= Adding openstack client 3.15.0 ============"
+sudo pip install 'python-openstackclient==3.15.0'
+sudo pip install 'shade==1.27.1'
 
-echo "================ Adding boto 2.46.1 ======================="
-sudo pip install 'boto==2.46.1'
+echo "================ Adding ansible 2.4.3.0 ===================="
+sudo pip install 'ansible==2.4.3.0'
+
+echo "================ Adding boto 2.48.0 ======================="
+sudo pip install 'boto==2.48.0'
 
 echo "================ Adding boto3 ======================="
-sudo pip install 'boto3==1.5.15'
+sudo pip install 'boto3==1.7.3'
 
-echo "================ Adding apache-libcloud 2.0.0 ======================="
-sudo pip install 'apache-libcloud==2.0.0'
+echo "================ Adding apache-libcloud 2.3.0 ======================="
+sudo pip install 'apache-libcloud==2.3.0'
 
-echo "================ Adding azure 2.0.0rc5 ======================="
-sudo pip install 'azure==2.0.0rc5'
+echo "================ Adding azure 3.0.0 ======================="
+sudo pip install 'azure==3.0.0'
 
 echo "================ Adding dopy 0.3.7a ======================="
 sudo pip install 'dopy==0.3.7a'
 
-export PK_VERSION=1.1.0
+export PK_VERSION=1.2.2
 echo "================ Adding packer $PK_VERSION ===================="
 export PK_FILE=packer_"$PK_VERSION"_linux_arm.zip
 
