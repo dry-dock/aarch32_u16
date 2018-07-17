@@ -96,7 +96,7 @@ sudo pip install 'awsebcli==3.14.2'
 
 echo "================= Adding openstack client 3.15.0 ============"
 sudo pip install 'python-openstackclient==3.15.0'
-sudo pip install 'shade==1.27.1'
+sudo pip install 'shade==1.28.0'
 
 echo "================ Adding ansible 2.4.3.0 ===================="
 sudo pip install 'ansible==2.4.3.0'
