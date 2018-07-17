@@ -98,8 +98,8 @@ echo "================= Adding openstack client 3.15.0 ============"
 sudo pip install 'python-openstackclient==3.15.0'
 sudo pip install 'shade==1.28.0'
 
-echo "================ Adding ansible 2.4.3.0 ===================="
-sudo pip install 'ansible==2.4.3.0'
+echo "================ Adding ansible 2.6.1 ===================="
+sudo pip install 'ansible==2.6.1'
 
 echo "================ Adding boto 2.48.0 ======================="
 sudo pip install 'boto==2.48.0'
