@@ -116,7 +116,7 @@ sudo pip install 'azure==3.0.0'
 echo "================ Adding dopy 0.3.7a ======================="
 sudo pip install 'dopy==0.3.7a'
 
-export PK_VERSION=1.2.4
+export PK_VERSION=1.2.3
 echo "================ Adding packer $PK_VERSION ===================="
 export PK_FILE=packer_"$PK_VERSION"_linux_arm.zip
 
