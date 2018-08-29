@@ -9,7 +9,7 @@ export NVM_DIR="/root/.nvm"
 # add source of nvm to .bashrc - allows user to use nvm as a command
 echo "source ~/.nvm/nvm.sh" >> /etc/drydock/.env
 
-echo "================= Installing nodejs 8.11.1 ================="
+echo "================= Installing nodejs 8.11.x ================="
 curl -sSL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 sudo apt-get install -qq -y nodejs
 sudo npm install npm --global
