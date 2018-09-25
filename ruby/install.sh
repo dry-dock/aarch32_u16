@@ -13,11 +13,12 @@ echo "source /usr/local/rvm/scripts/rvm" >> /etc/drydock/.env
 source /usr/local/rvm/scripts/rvm
 rvm requirements
 
+export RVM_VERSION=2.5.1
 echo "================= Installing default ruby ==================="
-rvm install 2.5.1
+rvm install "$RVM_VERSION"
 
 # tell rvm to use this version as default
-rvm use 2.5.1 --default
+rvm use "$RVM_VERSION" --default
 
 #update gems to current
 rvm rubygems current
