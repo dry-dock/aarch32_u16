@@ -103,6 +103,10 @@ export OPENSTACKCLIENT_VERSION=3.16.1
 echo "================= Adding openstack client $OPENSTACKCLIENT_VERSION ==========="
 sudo pip install python-openstackclient=="$OPENSTACKCLIENT_VERSION"
 
+export SHADE_VERSION=1.29.0
+echo "================= Adding shade $SHADE_VERSION ================================="
+sudo pip install shade=="$SHADE_VERSION"
+
 export ANSIBLE_VERSION=2.6.4
 echo "================ Adding ansible $ANSIBLE_VERSION =============================="
 sudo pip install ansible=="$ANSIBLE_VERSION"
