@@ -64,7 +64,6 @@ add-apt-repository ppa:git-core/ppa -y
 apt-get update
 apt-get install  -y git="$GIT_VERSION"
 
-
 export JQ_VERSION=1.5*
 echo "================= Adding JQ $JQ_VERSION ==================="
 apt-get install  -y jq="$JQ_VERSION"
@@ -77,7 +76,6 @@ echo "================= Installing Java  ==================="
 
 echo "================= Installing Ruby  ==================="
 /u16/ruby/install.sh
-
 
 export CLOUD_SDKREPO=216.0*
 echo "================= Adding gcloud $CLOUD_SDKREPO ============"
