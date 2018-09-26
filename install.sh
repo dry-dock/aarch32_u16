@@ -50,11 +50,6 @@ apt-get install -y -q \
   libffi-dev=3.2* \
   vim=2:7*
 
-echo "================= Installing Git ==================="
-add-apt-repository ppa:git-core/ppa -y
-apt-get update -qq
-apt-get install -y -q git=1:2*
-
 echo "================= Installing Python packages ==================="
 apt-get install -y -q \
   python-pip=8.1* \
@@ -63,23 +58,31 @@ apt-get install -y -q \
 
 pip install virtualenv
 
-echo "================= Adding JQ 1.5.1 ==================="
-apt-get install -y -q jq=1.5*
+export GIT_VERSION=1:2.*
+echo "================= Installing Git "$GIT_VERSION" ==================="
+add-apt-repository ppa:git-core/ppa -y
+apt-get update
+apt-get install  -y git="$GIT_VERSION"
 
-echo "================= Installing Node 8.x ==================="
+export JQ_VERSION=1.5*
+echo "================= Adding JQ $JQ_VERSION ==================="
+apt-get install  -y jq="$JQ_VERSION"
+
+echo "================= Installing Node  ==================="
 /u16/node/install.sh
 
-echo "================= Installing Java 10 ==================="
+echo "================= Installing Java  ==================="
 /u16/java/install.sh
 
-echo "================= Installing Ruby 2.5.1  ==================="
+echo "================= Installing Ruby  ==================="
 /u16/ruby/install.sh
 
-echo "================= Adding gcloud ============"
+export CLOUD_SDKREPO=216.0*
+echo "================= Adding gcloud $CLOUD_SDKREPO ============"
 CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)"
 echo "deb http://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
 curl -sS https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
-sudo apt-get update && sudo apt-get install google-cloud-sdk=211.*
+sudo apt-get update && sudo apt-get install google-cloud-sdk="$CLOUD_SDKREPO"
 
 KUBECTL_VERSION=1.11.0
 echo "================= Adding kubectl $KUBECTL_VERSION ==================="
@@ -88,35 +91,47 @@ curl -sSLO https://storage.googleapis.com/kubernetes-release/release/v"$KUBECTL_
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 
-echo "================= Adding awscli 1.15.73 ============"
-sudo pip install 'awscli==1.15.73'
+export AWS_VERSION=1.16.14
+echo "================= Adding awscli "$AWS_VERSION" ============"
+sudo pip install  awscli=="$AWS_VERSION"
 
-echo "================= Adding awsebcli 3.14.3 ============"
-sudo pip install 'awsebcli==3.14.3'
+export AWSEBCLI_VERSION=3.14.6
+echo "================= Adding awsebcli $AWSEBCLI_VERSION =========================="
+sudo pip install awsebcli=="$AWSEBCLI_VERSION"
 
-echo "================= Adding openstack client 3.16.0 ============"
-sudo pip install 'python-openstackclient==3.16.0'
-sudo pip install 'shade==1.29.0'
+export OPENSTACKCLIENT_VERSION=3.16.1
+echo "================= Adding openstack client $OPENSTACKCLIENT_VERSION ==========="
+sudo pip install python-openstackclient=="$OPENSTACKCLIENT_VERSION"
 
-echo "================ Adding ansible 2.6.1 ===================="
-sudo pip install 'ansible==2.6.1'
+export SHADE_VERSION=1.29.0
+echo "================= Adding shade $SHADE_VERSION ================================="
+sudo pip install shade=="$SHADE_VERSION"
 
-echo "================ Adding boto 2.49.0 ======================="
-sudo pip install 'boto==2.49.0'
+export ANSIBLE_VERSION=2.6.4
+echo "================ Adding ansible $ANSIBLE_VERSION =============================="
+sudo pip install ansible=="$ANSIBLE_VERSION"
 
-echo "================ Adding boto3 ======================="
-sudo pip install 'boto3==1.7.72'
+export BOTO_VERSION=2.49.0
+echo "================ Adding boto $BOTO_VERSION ==================================="
+sudo pip install boto=="$BOTO_VERSION"
 
-echo "================ Adding apache-libcloud 2.3.0 ======================="
-sudo pip install 'apache-libcloud==2.3.0'
+export BOTO3_VERSION=1.9.4
+echo "================ Adding boto3 $BOTO3_VERSION =================================="
+sudo pip install boto3=="$BOTO3_VERSION"
 
-echo "================ Adding azure 3.0.0 ======================="
-sudo pip install 'azure==3.0.0'
+export APACHE_LIBCLOUD=2.3.0
+echo "================ Adding apache-libcloud "$APACHE_LIBCLOUD" ===================="
+sudo pip install apache-libcloud=="$APACHE_LIBCLOUD"
 
-echo "================ Adding dopy 0.3.7a ======================="
-sudo pip install 'dopy==0.3.7a'
+export AZURE_VERSION=3.0.0
+echo "================ Adding azure $AZURE_VERSION ==================================="
+sudo pip install azure=="$AZURE_VERSION"
 
-export PK_VERSION=1.2.5
+export DOPY_VERSION=0.3.7
+echo "================ Adding dopy $DOPY_VERSION ====================================="
+sudo pip install dopy=="$DOPY_VERSION"
+
+export PK_VERSION=1.3.0
 echo "================ Adding packer $PK_VERSION ===================="
 export PK_FILE=packer_"$PK_VERSION"_linux_arm.zip
 
