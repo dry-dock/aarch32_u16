@@ -15,7 +15,7 @@ echo "source /usr/local/rvm/scripts/rvm" >> /etc/drydock/.env
 source /usr/local/rvm/scripts/rvm
 rvm requirements
 
-export RVM_VERSION=2.6.0
+export RVM_VERSION=2.6.1
 echo "================= Installing default ruby ==================="
 rvm install "$RVM_VERSION"
 
